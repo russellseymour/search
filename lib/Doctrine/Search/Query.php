@@ -78,7 +78,7 @@ class Query
     /**
      * @var array
      */
-    protected $facets;
+    protected $aggregations;
 
     public function __construct(SearchManager $sm)
     {
@@ -167,9 +167,9 @@ class Query
     /**
      * @return array
      */
-    public function getFacets()
+    public function getAggregations()
     {
-        return $this->facets;
+        return $this->aggregations;
     }
 
     /**
@@ -227,7 +227,7 @@ class Query
         // TODO: abstraction of support for different result sets
         if ($resultSet instanceof Elastica\ResultSet) {
             $this->count = $resultSet->getTotalHits();
-            $this->facets = $resultSet->getFacets();
+            $this->aggregations = $resultSet->getAggregations();
             $results = $resultSet->getResults();
 
         } else {
